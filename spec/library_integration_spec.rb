@@ -22,4 +22,11 @@ describe 'librarian path', {:type => :feature} do
     click_button('Add Book')
     expect(page).to have_content("Library Catalog")
   end
+
+  it "allows the librarian to view a list of books in the catalog" do
+    book = Book.new({:book_id => nil, :title => '19Q4',:author => 'Haruki Murakami', :year_published => '2009'})
+    book.save()
+    visit '/librarian/books'
+    expect(page).to have_content("19Q4 by Haruki Murakami")
+  end
 end
