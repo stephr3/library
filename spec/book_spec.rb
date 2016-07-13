@@ -78,4 +78,15 @@ describe(Book) do
       expect(test_book1.title()).to(eq('My name is Jo'))
     end
   end
+
+  describe('#delete') do
+    it 'lets the user delete a book' do
+      test_book1 = Book.new({:book_id => nil, :title => '19Q4',:author => 'Haruki Murakami', :year_published => '2009'})
+      test_book2 = Book.new({:book_id => nil, :title => 'Bossypants',:author => 'Tina Fey', :year_published => '2011'})
+      test_book1.save()
+      test_book2.save()
+      test_book1.delete()
+      expect(Book.all()).to(eq([test_book2]))
+    end
+  end
 end

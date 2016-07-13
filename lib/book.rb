@@ -76,4 +76,8 @@ class Book
     DB.exec("UPDATE books SET title = '#{@title}' WHERE book_id = #{@book_id};")
     DB.exec("UPDATE books SET year_published = #{@year_published} WHERE book_id = #{@book_id};")
   end
+
+  define_method(:delete) do
+    DB.exec("DELETE FROM books WHERE book_id = #{self.book_id};")
+  end
  end
