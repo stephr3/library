@@ -5,4 +5,6 @@
   <li>Year Published: <%= @book.year_published() %></li>
 </ul>
 
+
+<a href="/librarian/books/<%= @book.book_id %>/edit" id="edit"><button type="button" name="edit">Edit</button></a>
 <a href="/librarian/books" id="books"><button type="button" name="books">Back to All Books</button></a>

@@ -38,3 +38,17 @@ get('/librarian/books/:book_id') do
   @book = Book.find_by_book_id(params.fetch('book_id').to_i())
   erb(:book)
 end
+
+get('/librarian/books/:book_id/edit') do
+  @book = Book.find_by_book_id(params.fetch('book_id').to_i())
+  erb(:update_book_form)
+end
+
+patch('/librarian/books/:book_id') do
+  title = params.fetch('title')
+  author = params.fetch('author')
+  year_published = params.fetch('year_published')
+  @book = Book.find_by_book_id(params.fetch("book_id").to_i())
+  @book.update({:title => title, :author => author, :year_published => year_published})
+  erb(:book)
+end

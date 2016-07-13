@@ -37,4 +37,18 @@ describe 'librarian path', {:type => :feature} do
     click_link '19Q4 by Haruki Murakami'
     expect(page).to have_content("Title: 19Q4")
   end
+
+  it "allows the librarian to update a book" do
+    book = Book.new({:book_id => nil, :title => '19Q4',:author => 'Haruki Murakami', :year_published => '2009'})
+    book.save()
+    visit '/librarian/books'
+    click_link '19Q4 by Haruki Murakami'
+    click_link 'Edit'
+    fill_in 'title', :with => '19Q4'
+    fill_in 'author', :with => 'Haruki Murakami'
+    fill_in 'year_published', :with => '2011'
+    click_button 'Submit'
+    expect(page).to have_content("2011")
+  end
+
 end

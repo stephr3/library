@@ -1,0 +1,19 @@
+<h1>Edit <%= @book.title() %> </h1>
+
+<form action="/librarian/books/<%= @book.book_id()%>" method="post">
+  <input name="_method" type="hidden" value="patch">
+  <div class="form-group">
+    <label for="title">Title:</label>
+    <input type="text" name="title" id="title">
+  </div>
+  <div class="form-group">
+    <label for="author">Author:</label>
+    <input type="text" name="author" id="author">
+  </div>
+  <div class="form-group">
+    <label for="year_published">Year Published:</label>
+    <input type="text" name="year_published" id="year_published">
+  </div>
+
+  <button type="submit">Submit</button>
+</form>
