@@ -1,13 +1,12 @@
 require('pry')
 
 class Book
-  attr_reader(:book_id, :title, :author_first, :author_last, :year_published)
+  attr_reader(:book_id, :title, :author, :year_published)
 
   define_method(:initialize) do |attributes|
     @book_id = attributes[:book_id]
     @title = attributes[:title]
-    @author_first = attributes[:author_first]
-    @author_last = attributes[:author_last]
+    @author = attributes[:author]
     @year_published = attributes[:year_published]
   end
 
@@ -17,10 +16,9 @@ class Book
     returned_books.each() do |book|
       book_id = book.fetch("book_id").to_i()
       title = book.fetch("title")
-      author_first = book.fetch("author_first")
-      author_last = book.fetch("author_last")
+      author = book.fetch("author")
       year_published = book.fetch("year_published")
-      books.push(Book.new({:book_id => book_id, :title => title, :author_first => author_first, :author_last => author_last, :year_published => year_published}))
+      books.push(Book.new({:book_id => book_id, :title => title, :author => author, :year_published => year_published}))
     end
     books
   end
@@ -30,7 +28,7 @@ class Book
   end
 
   define_method(:save) do
-    result = DB.exec("INSERT INTO books (title, author_first, author_last, year_published) VALUES ('#{@title}', '#{@author_first}', '#{@author_last}', #{@year_published}) RETURNING book_id;")
+    result = DB.exec("INSERT INTO books (title, author, year_published) VALUES ('#{@title}', '#{@author}', #{@year_published}) RETURNING book_id;")
     @book_id = result.first['book_id'].to_i()
   end
 
@@ -40,10 +38,23 @@ class Book
     returned_books.each do |book|
       book_id = book['book_id'].to_i
       title = book['title']
-      author_first = book['author_first']
-      author_last = book['author_last']
+      author = book['author']
       year_published = book['year_published']
-      books.push(Book.new({:book_id => book_id, :title => title, :author_first => author_first, :author_last => author_last, :year_published => year_published}))
+      books.push(Book.new({:book_id => book_id, :title => title, :author => author, :year_published => year_published}))
+    end
+    books
+  end
+
+# Change to find_by_author
+  define_singleton_method(:find_by_author) do |author|
+    returned_books = DB.exec("SELECT * FROM books WHERE author = '#{author}';")
+    books = []
+    returned_books.each do |book|
+      book_id = book['book_id'].to_i
+      title = book['title']
+      author = book['author']
+      year_published = book['year_published']
+      books.push(Book.new({:book_id => book_id, :title => title, :author => author, :year_published => year_published}))
     end
     books
   end
