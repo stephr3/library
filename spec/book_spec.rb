@@ -69,12 +69,13 @@ describe(Book) do
     end
   end
 
-  describe('#update_author') do
-    it 'lets the user update the author' do
+  describe('#update') do
+    it 'lets the user update the attributes of the book' do
       test_book1 = Book.new({:book_id => nil, :title => '19Q4',:author => 'Haruki Murakami', :year_published => '2009'})
       test_book1.save()
-      test_book1.update_author({:author => 'Jo Bob'})
+      test_book1.update({:book_id => nil, :title => 'My name is Jo',:author => 'Jo Bob', :year_published => '2009'})
       expect(test_book1.author()).to(eq('Jo Bob'))
+      expect(test_book1.title()).to(eq('My name is Jo'))
     end
   end
 end
