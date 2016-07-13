@@ -66,4 +66,10 @@ class Book
     year_published = returned_book['year_published']
     Book.new({:book_id => book_id, :title => title, :author => author, :year_published => year_published})
   end
+
+  define_method(:update_author) do |attributes|
+    @author = attributes.fetch(:author)
+    @book_id = self.book_id()
+    DB.exec("UPDATE books SET author = '#{@author}' WHERE book_id = #{@book_id};")
+  end
  end
