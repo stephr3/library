@@ -51,4 +51,13 @@ describe 'librarian path', {:type => :feature} do
     expect(page).to have_content("2011")
   end
 
+  it "allows the librarian to delete a book" do
+    book = Book.new({:book_id => nil, :title => '19Q4',:author => 'Haruki Murakami', :year_published => '2009'})
+    book.save()
+    visit '/librarian/books'
+    click_link '19Q4 by Haruki Murakami'
+    click_link 'Edit'
+    click_button 'Delete Book'
+    expect(page).to have_no_content("19Q4")
+  end
 end

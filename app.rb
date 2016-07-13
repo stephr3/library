@@ -52,3 +52,10 @@ patch('/librarian/books/:book_id') do
   @book.update({:title => title, :author => author, :year_published => year_published})
   erb(:book)
 end
+
+delete('/librarian/books') do
+  @book = Book.find_by_book_id(params.fetch('book_id').to_i())
+  @book.delete()
+  @books = Book.all()
+  erb(:books)
+end
