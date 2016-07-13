@@ -14,3 +14,22 @@ end
 get('/librarian') do
   erb(:librarian)
 end
+
+get('/librarian/books') do
+  @books = Book.all()
+  erb(:books)
+end
+
+get('/librarian/books/new') do
+  erb(:book_form)
+end
+
+post('/librarian/books') do
+  title = params.fetch('title')
+  author = params.fetch('author')
+  year_published = params.fetch('year_published')
+  book = Book.new({:title => title, :author => author, :year_published => year_published})
+  book.save()
+  @books = Book.all()
+  erb(:books)
+end
