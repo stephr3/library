@@ -9,6 +9,14 @@ describe(Book) do
     end
   end
 
+  describe('#book_id') do
+    it "returns the id of the book" do
+      test_book = Book.new({:book_id => nil, :title => '19Q4', :author_first => 'Haruki', :author_last => 'Murakami', :year_published => '2009'})
+      test_book.save()
+      expect(test_book.book_id().class()).to(eq(Fixnum))
+    end
+  end
+
   describe('.all') do
     it 'is an empty array at first' do
       expect(Book.all()).to(eq([]))
