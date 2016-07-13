@@ -1,0 +1,8 @@
+<h2> Search Catalog by Author</h2>
+<form action="/librarian/author_search/<%= @book.book_id() %>" method="post">
+  <div class="form-group">
+    <label for="author_search">Enter Author:</label>
+    <input type="text" name="author_search" id="author_search">
+  </div>
+  <button type="submit" id="submit_author">Search for this Author</button>
+</form>

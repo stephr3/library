@@ -14,7 +14,7 @@ describe 'librarian path', {:type => :feature} do
 
   it "allows the librarian to add a book" do
     visit '/librarian'
-    click_link 'View Books'
+    click_link 'View All Books in Catalog'
     click_link 'Add a Book'
     fill_in('title', :with => '19Q4')
     fill_in('author', :with => 'Haruki Murakami')
@@ -59,5 +59,14 @@ describe 'librarian path', {:type => :feature} do
     click_link 'Edit'
     click_button 'Delete Book'
     expect(page).to have_no_content("19Q4")
+  end
+
+  it "allows the librarian to search for a book by title" do
+    book = Book.new({:book_id => nil, :title => '19Q4',:author => 'Haruki Murakami', :year_published => '2009'})
+    book.save()
+    visit '/librarian'
+    fill_in 'title_search', :with => '19Q4'
+    click_button 'Search for this Title'
+    expect(page).to have_content('About this Book...')
   end
 end

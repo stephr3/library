@@ -59,3 +59,15 @@ delete('/librarian/books') do
   @books = Book.all()
   erb(:books)
 end
+
+post('/librarian/title_search') do
+  title = params.fetch('title_search')
+  @book = Book.find_by_title(title)
+  erb(:search_results)
+end
+
+post('librarian/author_search/:id') do
+  author = params.fetch('author_search')
+  @book = Book.find_by_author(author)
+  erb(:book)
+end
