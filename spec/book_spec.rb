@@ -9,6 +9,10 @@ describe(Book) do
     end
   end
 
-
+  describe('.all') do
+    it 'is an empty array at first' do
+      expect(Book.all()).to(eq([]))
+    end
+  end
 
 end

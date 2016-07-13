@@ -9,4 +9,9 @@ class Book
     @author_last = attributes[:author_last]
     @year_published = attributes[:year_published]
   end
-end
+
+  define_singleton_method(:all) do
+    []
+  end
+  
+ end
