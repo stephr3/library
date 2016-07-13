@@ -33,3 +33,8 @@ post('/librarian/books') do
   @books = Book.all()
   erb(:books)
 end
+
+get('/librarian/books/:book_id') do
+  @book = Book.find_by_book_id(params.fetch('book_id').to_i())
+  erb(:book)
+end
