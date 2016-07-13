@@ -39,4 +39,14 @@ describe(Book) do
     end
   end
 
+  describe('.find_by_title') do
+    it 'locates a book with a given title' do
+      test_book1 = Book.new({:book_id => nil, :title => '19Q4', :author_first => 'Haruki', :author_last => 'Murakami', :year_published => '2009'})
+      test_book2 = Book.new({:book_id => nil, :title => 'Bossypants', :author_first => 'Tina', :author_last => 'Fey', :year_published => '2011'})
+      test_book1.save()
+      test_book2.save()
+      expect(Book.find_by_title(test_book1.title())).to(eq([test_book1]))
+    end
+  end
+
 end

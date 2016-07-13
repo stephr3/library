@@ -29,10 +29,23 @@ class Book
     self.title == other.title && self.book_id == other.book_id
   end
 
-
   define_method(:save) do
     result = DB.exec("INSERT INTO books (title, author_first, author_last, year_published) VALUES ('#{@title}', '#{@author_first}', '#{@author_last}', #{@year_published}) RETURNING book_id;")
     @book_id = result.first['book_id'].to_i()
+  end
+
+  define_singleton_method(:find_by_title) do |title|
+    returned_books = DB.exec("SELECT * FROM books WHERE title = '#{title}';")
+    books = []
+    returned_books.each do |book|
+      book_id = book['book_id'].to_i
+      title = book['title']
+      author_first = book['author_first']
+      author_last = book['author_last']
+      year_published = book['year_published']
+      books.push(Book.new({:book_id => book_id, :title => title, :author_first => author_first, :author_last => author_last, :year_published => year_published}))
+    end
+    books
   end
 
  end
