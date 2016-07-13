@@ -24,7 +24,7 @@ class Book
   end
 
   define_method(:==) do |other|
-    self.title == other.title && self.book_id == other.book_id
+    self.title.==(other.title).&(self.book_id.==(other.book_id))
   end
 
   define_method(:save) do
@@ -45,7 +45,6 @@ class Book
     books
   end
 
-# Change to find_by_author
   define_singleton_method(:find_by_author) do |author|
     returned_books = DB.exec("SELECT * FROM books WHERE author = '#{author}';")
     books = []
@@ -59,4 +58,12 @@ class Book
     books
   end
 
+  define_singleton_method(:find_by_book_id) do |book_id|
+    returned_book = DB.exec("SELECT * FROM books WHERE book_id =#{book_id};").first()
+    book_id = returned_book['book_id'].to_i
+    title = returned_book['title']
+    author = returned_book['author']
+    year_published = returned_book['year_published']
+    Book.new({:book_id => book_id, :title => title, :author => author, :year_published => year_published})
+  end
  end
