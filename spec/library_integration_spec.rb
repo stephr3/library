@@ -212,4 +212,11 @@ describe 'patron path', {:type => :feature} do
     expect(page).to have_content("19Q4 by Haruki Murakami")
   end
 
+  it "allows the patron to view a book" do
+    book = Book.new({:book_id => nil, :title => '19Q4',:author => 'Haruki Murakami', :year_published => '2009'})
+    book.save()
+    visit '/patron/books'
+    click_link '19Q4 by Haruki Murakami'
+    expect(page).to have_content("Title: 19Q4")
+  end
 end
