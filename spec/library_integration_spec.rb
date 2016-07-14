@@ -195,6 +195,15 @@ describe 'patron path', {:type => :feature} do
     expect(page).to have_content("971-358-9742")
   end
 
+  it "allows the patron to delete an account" do
+    patron = Patron.new({:patron_id => nil, :name => 'Mr. Rogers',:phone => '503-250-2173'})
+    patron.save()
+    visit '/patron/patrons'
+    click_link 'Mr. Rogers'
+    click_link 'Edit'
+    click_button 'Delete Patron'
+    expect(page).to have_no_content("Mr. Rogers")
+  end
 
 
 end
