@@ -92,4 +92,12 @@ describe 'librarian path', {:type => :feature} do
     click_button 'Search for this Author'
     expect(page).to have_content('Sputnik Sweetheart')
   end
+
+  it "returns some text if a search returns no results" do
+    visit '/librarian'
+    click_link 'Search Books by Author'
+    fill_in 'author_search', :with => 'Haruki Murakami'
+    click_button 'Search for this Author'
+    expect(page).to have_content('Sorry')
+  end
 end

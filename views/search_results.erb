@@ -1,9 +1,15 @@
 <h1>Your Search Results:</h1>
 
+<%if@books.any?%>
 <ul>
   <% @books.each do |book| %>
     <a href="/librarian/books/<%= book.book_id %>"><li><%= book.title %> by <%= book.author %></li></a>
   <% end %>
 </ul>
+<%else%>
+<h3>Sorry, there are no results for your search</h3>
+<a href="/librarian/title_search"><button type="button">Search Again by Title</button></a>
+<a href="/librarian/author_search"><button type="button">Search Again by Author</button></a>
+<%end%>
 
 <a href="/librarian" id="nifty_nook"><button type="button" name="nifty_nook">Back to the Nifty Nook</button></a>
