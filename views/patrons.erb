@@ -1,0 +1,12 @@
+<h1>Patrons</h1>
+
+<ul>
+  <% @patrons.each do |patron| %>
+    <a href="/librarian/patrons/<%= patron.patron_id %>"><li><%= patron.name %></li></a>
+  <% end %>
+</ul>
+
+
+<a href='/librarian/patrons/new' id='add_patron'><button type='button' name='add_patron'>Add a Patron</button></a>
+<a href='/librarian'><button type='button'>Back to Nifty Nook</button></a>
+<a href='/'><button type='button'>Home</button></a>

@@ -39,8 +39,6 @@ describe(Patron) do
     end
   end
 
-  # NEW STUFF
-
   describe('.find_by_name') do
     it 'locates patrons with a given name' do
       test_patron1 = Patron.new({:patron_id => nil, :name => 'Mr. Rogers',:phone => '503-250-2173'})

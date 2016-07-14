@@ -1,0 +1,10 @@
+<h1><%= @patron.name() %>'s Account</h1>
+<ul>
+  <li>Account Number: <%= @patron.patron_id() %></li>
+  <li>Name: <%= @patron.name() %></li>
+  <li>Phone: <%= @patron.phone() %></li>
+</ul>
+
+
+<a href="/librarian/patrons/<%= @patron.patron_id %>/edit" id="edit"><button type="button" name="edit">Edit</button></a>
+<a href="/librarian/patrons" id="patrons"><button type="button" name="patrons">Back to All Patrons</button></a>

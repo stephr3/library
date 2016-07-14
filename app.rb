@@ -88,3 +88,54 @@ post('/librarian/author_search') do
   @books = Book.find_by_author(author)
   erb(:search_results)
 end
+
+# PATRONS
+
+get('/librarian/patrons') do
+  @patrons = Patron.all()
+  erb(:patrons)
+end
+
+get('/librarian/patrons/new') do
+  erb(:patron_form)
+end
+
+post('/librarian/patrons') do
+  name = params.fetch('name')
+  phone = params.fetch('phone')
+  patron = Patron.new({:name => name, :phone => phone})
+  patron.save()
+  @patrons = Patron.all()
+  erb(:patrons)
+end
+
+get('/librarian/patrons/:patron_id') do
+  @patron = Patron.find_by_patron_id(params.fetch('patron_id').to_i())
+  erb(:patron)
+end
+
+get('/librarian/patrons/:patron_id/edit') do
+  @patron = Patron.find_by_patron_id(params.fetch('patron_id').to_i())
+  erb(:update_patron_form)
+end
+
+patch('/librarian/patrons/:patron_id') do
+  @patron = Patron.find_by_patron_id(params.fetch("patron_id").to_i())
+  name = params.fetch('name')
+  if name.==('')
+    name = @patron.name()
+  end
+  phone = params.fetch('phone')
+  if phone.==('')
+    phone = @patron.phone()
+  end
+  @patron.update({:name => name, :phone => phone})
+  erb(:patron)
+end
+
+delete('/librarian/patrons/:patron_id') do
+  @patron = Patron.find_by_patron_id(params.fetch('patron_id').to_i())
+  @patron.delete()
+  @patrons = Patron.all()
+  erb(:patrons)
+end

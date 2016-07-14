@@ -99,4 +99,54 @@ describe 'librarian path', {:type => :feature} do
     click_button 'Search for this Author'
     expect(page).to have_content('Sorry')
   end
+
+# Patrons
+
+it "allows the librarian to add a patron" do
+  visit '/librarian'
+  click_link 'View All Patrons'
+  click_link 'Add a Patron'
+  fill_in('name', :with => 'Mr. Rogers')
+  fill_in('phone', :with => '503-250-2173')
+  click_button('Add Account')
+  expect(page).to have_content("Patrons")
+end
+
+
+it "allows the librarian to view a list of patrons" do
+  patron = Patron.new({:patron_id => nil, :name => 'Mr. Rogers',:phone => '503-250-2173'})
+  patron.save()
+  visit '/librarian/patrons'
+  expect(page).to have_content("Mr. Rogers")
+end
+
+  it "allows the librarian to view a patron" do
+    patron = Patron.new({:patron_id => nil, :name => 'Mr. Rogers',:phone => '503-250-2173'})
+    patron.save()
+    visit '/librarian/patrons'
+    click_link 'Mr. Rogers'
+    expect(page).to have_content("Phone: 503-250-2173")
+  end
+
+  it "allows the librarian to update a patron" do
+    patron = Patron.new({:patron_id => nil, :name => 'Mr. Rogers',:phone => '503-250-2173'})
+    patron.save()
+    visit '/librarian/patrons'
+    click_link 'Mr. Rogers'
+    click_link 'Edit'
+    fill_in 'phone', :with => '971-358-9742'
+    click_button 'Submit'
+    expect(page).to have_content("Mr. Rogers")
+    expect(page).to have_content("971-358-9742")
+  end
+
+  it "allows the librarian to delete a patron" do
+    patron = Patron.new({:patron_id => nil, :name => 'Mr. Rogers',:phone => '503-250-2173'})
+    patron.save()
+    visit '/librarian/patrons'
+    click_link 'Mr. Rogers'
+    click_link 'Edit'
+    click_button 'Delete Patron'
+    expect(page).to have_no_content("Mr. Rogers")
+  end
 end
