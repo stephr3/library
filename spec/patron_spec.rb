@@ -67,7 +67,31 @@ describe(Patron) do
       expect(test_patron1.name()).to(eq('Fred Rogers'))
       expect(test_patron1.phone()).to(eq('971-358-9742'))
     end
+    it 'lets you add a book to a patron' do
+      book = Book.new({:id => nil, :title => '19Q4',:author => 'Haruki Murakami', :year_published => '2009'})
+      book.save()
+      patron = Patron.new({:id => nil, :name => 'Mr. Rogers',:phone => '503-250-2173'})
+      patron.save()
+      patron.update({:book_ids => [book.id()]})
+      expect(patron.books()).to(eq([book]))
+    end
   end
+
+  describe("#books") do
+  it("returns all of the books a particular patron has checked out") do
+    book = Book.new({:id => nil, :title => '19Q4',:author => 'Haruki Murakami', :year_published => '2009'})
+    book.save()
+    book2 = Book.new({:id => nil, :title => 'Bossypants',:author => 'Tina Fey', :year_published => '2011'})
+    book2.save()
+    patron = Patron.new({:id => nil, :name => 'Mr. Rogers',:phone => '503-250-2173'})
+    patron.save()
+    patron.update(:book_ids => [book.id()])
+    patron.update(:book_ids => [book2.id()])
+    expect(patron.books()).to(eq([book, book2]))
+  end
+end
+
+
 
   describe('#delete') do
     it 'lets the user delete a patron' do
