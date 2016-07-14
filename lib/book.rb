@@ -95,6 +95,7 @@ class Book
   end
 
   define_method(:delete) do
+    DB.exec("DELETE FROM checkouts WHERE movie_id = #{self.id()};")
     DB.exec("DELETE FROM books WHERE id = #{self.id};")
   end
  end
