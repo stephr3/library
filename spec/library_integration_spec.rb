@@ -175,4 +175,12 @@ describe 'patron path', {:type => :feature} do
     expect(page).to have_content("Mr. Rogers")
   end
 
+  it "allows the patron to view their account page" do
+    patron = Patron.new({:patron_id => nil, :name => 'Mr. Rogers',:phone => '503-250-2173'})
+    patron.save()
+    visit '/patron/patrons'
+    click_link 'Mr. Rogers'
+    expect(page).to have_content("Phone: 503-250-2173")
+  end
+
 end
