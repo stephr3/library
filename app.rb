@@ -199,3 +199,7 @@ get('/patron/books') do
   @books = Book.all()
   erb(:books)
 end
+
+get('/patron/author_search') do
+  erb(:author_search)
+end
