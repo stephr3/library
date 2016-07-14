@@ -203,3 +203,7 @@ end
 get('/patron/author_search') do
   erb(:author_search)
 end
+
+get('/patron/title_search') do
+  erb(:title_search)
+end
