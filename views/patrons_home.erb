@@ -1,0 +1,9 @@
+<h1>Patrons</h1>
+
+<ul>
+  <% @patrons.each do |patron| %>
+    <a href="/patron/patrons/<%= patron.patron_id %>"><li><%= patron.name %></li></a>
+  <% end %>
+</ul>
+
+<a href="/patron"><button type="button">Back</button></a>

@@ -100,7 +100,7 @@ describe 'librarian path', {:type => :feature} do
     expect(page).to have_content('Sorry')
   end
 
-# Patrons
+# Patrons-LIBRARIAN
 
 it "allows the librarian to add a patron" do
   visit '/librarian'
@@ -149,4 +149,30 @@ end
     click_button 'Delete Patron'
     expect(page).to have_no_content("Mr. Rogers")
   end
+end
+
+# PATRON PATRON PATH
+describe 'patron path', {:type => :feature} do
+  it "gets to the patron page" do
+    visit '/'
+    click_link "I'm a patron!"
+    expect(page).to have_content("Create a New Account")
+  end
+
+  it "creates a new patron account" do
+    visit '/patron'
+    click_link "Create a New Account"
+    fill_in "name", :with => "Mr. Rogers"
+    fill_in "phone", :with => "503-250-2173"
+    click_button "Submit"
+    expect(page).to have_content("Mr. Rogers")
+  end
+
+  it "allows patron to view a list of patrons" do
+    patron = Patron.new({:patron_id => nil, :name => 'Mr. Rogers',:phone => '503-250-2173'})
+    patron.save()
+    visit '/patron/patrons'
+    expect(page).to have_content("Mr. Rogers")
+  end
+
 end

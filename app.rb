@@ -89,7 +89,7 @@ post('/librarian/author_search') do
   erb(:search_results)
 end
 
-# PATRONS
+# PATRON-LIBRARIAN
 
 get('/librarian/patrons') do
   @patrons = Patron.all()
@@ -138,4 +138,33 @@ delete('/librarian/patrons/:patron_id') do
   @patron.delete()
   @patrons = Patron.all()
   erb(:patrons)
+end
+
+#PATRON PATH
+
+get ('/patron') do
+  erb(:patron_home)
+end
+
+get ('/patron/new') do
+  erb(:create_account)
+end
+
+get('/patron/patrons') do
+  @patrons = Patron.all()
+  erb(:patrons_home)
+end
+
+post('/patron/patrons') do
+  name = params.fetch('name')
+  phone = params.fetch('phone')
+  patron = Patron.new({:name => name, :phone => phone})
+  patron.save()
+  @patrons = Patron.all()
+  erb(:patrons_home)
+end
+
+get('/patron/patrons/:patron_id') do
+  @patron = Patron.find_by_patron_id(params.fetch('patron_id').to_i())
+  erb(:patron_account)
 end
