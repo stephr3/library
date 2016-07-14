@@ -14,7 +14,6 @@ describe 'librarian path', {:type => :feature} do
 
   it "allows the librarian to add a book" do
     visit '/librarian'
-    click_link 'View All Books in Catalog'
     click_link 'Add a Book'
     fill_in('title', :with => '19Q4')
     fill_in('author', :with => 'Haruki Murakami')
@@ -205,5 +204,12 @@ describe 'patron path', {:type => :feature} do
     expect(page).to have_no_content("Mr. Rogers")
   end
 
+  it "allows the patron to view a list of books in the catalog" do
+    book = Book.new({:book_id => nil, :title => '19Q4',:author => 'Haruki Murakami', :year_published => '2009'})
+    book.save()
+    visit '/patron'
+    click_link 'View All Books'
+    expect(page).to have_content("19Q4 by Haruki Murakami")
+  end
 
 end

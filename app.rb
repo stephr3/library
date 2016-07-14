@@ -188,10 +188,14 @@ patch('/patron/patrons/:patron_id') do
   erb(:patron_account)
 end
 
-
 delete('/patron/patrons/:patron_id') do
   @patron = Patron.find_by_patron_id(params.fetch('patron_id').to_i())
   @patron.delete()
   @patrons = Patron.all()
   erb(:patrons_home)
+end
+
+get('/patron/books') do
+  @books = Book.all()
+  erb(:books)
 end
