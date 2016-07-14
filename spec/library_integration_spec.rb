@@ -80,4 +80,16 @@ describe 'librarian path', {:type => :feature} do
     click_button 'Search for this Author'
     expect(page).to have_content('19Q4')
   end
+
+  it "allows the librarian to search for multiple books by one author" do
+    book1 = Book.new({:book_id => nil, :title => '19Q4',:author => 'Haruki Murakami', :year_published => '2009'})
+    book1.save()
+    book2 = Book.new({:book_id => nil, :title => 'Sputnik Sweetheart',:author => 'Haruki Murakami', :year_published => '1999'})
+    book2.save()
+    visit '/librarian'
+    click_link 'Search Books by Author'
+    fill_in 'author_search', :with => 'Haruki Murakami'
+    click_button 'Search for this Author'
+    expect(page).to have_content('Sputnik Sweetheart')
+  end
 end
