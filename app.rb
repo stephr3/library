@@ -168,3 +168,22 @@ get('/patron/patrons/:patron_id') do
   @patron = Patron.find_by_patron_id(params.fetch('patron_id').to_i())
   erb(:patron_account)
 end
+
+get('/patron/patrons/:patron_id/edit') do
+  @patron = Patron.find_by_patron_id(params.fetch('patron_id').to_i())
+  erb(:patron_update_account)
+end
+
+patch('/patron/patrons/:patron_id') do
+  @patron = Patron.find_by_patron_id(params.fetch("patron_id").to_i())
+  name = params.fetch('name')
+  if name.==('')
+    name = @patron.name()
+  end
+  phone = params.fetch('phone')
+  if phone.==('')
+    phone = @patron.phone()
+  end
+  @patron.update({:name => name, :phone => phone})
+  erb(:patron_account)
+end
