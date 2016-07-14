@@ -45,10 +45,19 @@ get('/librarian/books/:book_id/edit') do
 end
 
 patch('/librarian/books/:book_id') do
-  title = params.fetch('title')
-  author = params.fetch('author')
-  year_published = params.fetch('year_published')
   @book = Book.find_by_book_id(params.fetch("book_id").to_i())
+  title = params.fetch('title')
+  if title.==('')
+    title = @book.title()
+  end
+  author = params.fetch('author')
+  if author.==('')
+    author = @book.author()
+  end
+  year_published = params.fetch('year_published')
+  if year_published.==('')
+    year_published = @book.year_published()
+  end
   @book.update({:title => title, :author => author, :year_published => year_published})
   erb(:book)
 end

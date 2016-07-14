@@ -44,11 +44,10 @@ describe 'librarian path', {:type => :feature} do
     visit '/librarian/books'
     click_link '19Q4 by Haruki Murakami'
     click_link 'Edit'
-    fill_in 'title', :with => '19Q4'
-    fill_in 'author', :with => 'Haruki Murakami'
     fill_in 'year_published', :with => '2011'
     click_button 'Submit'
     expect(page).to have_content("2011")
+    expect(page).to have_content("19Q4")
   end
 
   it "allows the librarian to delete a book" do
