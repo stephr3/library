@@ -2,7 +2,7 @@
 
 <ul>
   <% @books.each do |book| %>
-    <a href="/librarian/books/<%= book.book_id %>"><li><%= book.title %> by <%= book.author %></li></a>
+    <a href="/librarian/books/<%= book.id %>"><li><%= book.title %> by <%= book.author %></li></a>
   <% end %>
 </ul>
 

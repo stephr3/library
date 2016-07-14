@@ -23,14 +23,14 @@ describe 'librarian path', {:type => :feature} do
   end
 
   it "allows the librarian to view a list of books in the catalog" do
-    book = Book.new({:book_id => nil, :title => '19Q4',:author => 'Haruki Murakami', :year_published => '2009'})
+    book = Book.new({:id => nil, :title => '19Q4',:author => 'Haruki Murakami', :year_published => '2009'})
     book.save()
     visit '/librarian/books'
     expect(page).to have_content("19Q4 by Haruki Murakami")
   end
 
   it "allows the librarian to view a book" do
-    book = Book.new({:book_id => nil, :title => '19Q4',:author => 'Haruki Murakami', :year_published => '2009'})
+    book = Book.new({:id => nil, :title => '19Q4',:author => 'Haruki Murakami', :year_published => '2009'})
     book.save()
     visit '/librarian/books'
     click_link '19Q4 by Haruki Murakami'
@@ -38,7 +38,7 @@ describe 'librarian path', {:type => :feature} do
   end
 
   it "allows the librarian to update a book" do
-    book = Book.new({:book_id => nil, :title => '19Q4',:author => 'Haruki Murakami', :year_published => '2009'})
+    book = Book.new({:id => nil, :title => '19Q4',:author => 'Haruki Murakami', :year_published => '2009'})
     book.save()
     visit '/librarian/books'
     click_link '19Q4 by Haruki Murakami'
@@ -50,7 +50,7 @@ describe 'librarian path', {:type => :feature} do
   end
 
   it "allows the librarian to delete a book" do
-    book = Book.new({:book_id => nil, :title => '19Q4',:author => 'Haruki Murakami', :year_published => '2009'})
+    book = Book.new({:id => nil, :title => '19Q4',:author => 'Haruki Murakami', :year_published => '2009'})
     book.save()
     visit '/librarian/books'
     click_link '19Q4 by Haruki Murakami'
@@ -60,7 +60,7 @@ describe 'librarian path', {:type => :feature} do
   end
 
   it "allows the librarian to search for a book by title" do
-    book = Book.new({:book_id => nil, :title => '19Q4',:author => 'Haruki Murakami', :year_published => '2009'})
+    book = Book.new({:id => nil, :title => '19Q4',:author => 'Haruki Murakami', :year_published => '2009'})
     book.save()
     visit '/librarian'
     click_link 'Search Books by Title'
@@ -70,7 +70,7 @@ describe 'librarian path', {:type => :feature} do
   end
 
   it "allows the librarian to search for a book by author" do
-    book = Book.new({:book_id => nil, :title => '19Q4',:author => 'Haruki Murakami', :year_published => '2009'})
+    book = Book.new({:id => nil, :title => '19Q4',:author => 'Haruki Murakami', :year_published => '2009'})
     book.save()
     visit '/librarian'
     click_link 'Search Books by Author'
@@ -80,9 +80,9 @@ describe 'librarian path', {:type => :feature} do
   end
 
   it "allows the librarian to search for multiple books by one author" do
-    book1 = Book.new({:book_id => nil, :title => '19Q4',:author => 'Haruki Murakami', :year_published => '2009'})
+    book1 = Book.new({:id => nil, :title => '19Q4',:author => 'Haruki Murakami', :year_published => '2009'})
     book1.save()
-    book2 = Book.new({:book_id => nil, :title => 'Sputnik Sweetheart',:author => 'Haruki Murakami', :year_published => '1999'})
+    book2 = Book.new({:id => nil, :title => 'Sputnik Sweetheart',:author => 'Haruki Murakami', :year_published => '1999'})
     book2.save()
     visit '/librarian'
     click_link 'Search Books by Author'
@@ -113,14 +113,14 @@ end
 
 
 it "allows the librarian to view a list of patrons" do
-  patron = Patron.new({:patron_id => nil, :name => 'Mr. Rogers',:phone => '503-250-2173'})
+  patron = Patron.new({:id => nil, :name => 'Mr. Rogers',:phone => '503-250-2173'})
   patron.save()
   visit '/librarian/patrons'
   expect(page).to have_content("Mr. Rogers")
 end
 
   it "allows the librarian to view a patron" do
-    patron = Patron.new({:patron_id => nil, :name => 'Mr. Rogers',:phone => '503-250-2173'})
+    patron = Patron.new({:id => nil, :name => 'Mr. Rogers',:phone => '503-250-2173'})
     patron.save()
     visit '/librarian/patrons'
     click_link 'Mr. Rogers'
@@ -128,7 +128,7 @@ end
   end
 
   it "allows the librarian to update a patron" do
-    patron = Patron.new({:patron_id => nil, :name => 'Mr. Rogers',:phone => '503-250-2173'})
+    patron = Patron.new({:id => nil, :name => 'Mr. Rogers',:phone => '503-250-2173'})
     patron.save()
     visit '/librarian/patrons'
     click_link 'Mr. Rogers'
@@ -140,7 +140,7 @@ end
   end
 
   it "allows the librarian to delete a patron" do
-    patron = Patron.new({:patron_id => nil, :name => 'Mr. Rogers',:phone => '503-250-2173'})
+    patron = Patron.new({:id => nil, :name => 'Mr. Rogers',:phone => '503-250-2173'})
     patron.save()
     visit '/librarian/patrons'
     click_link 'Mr. Rogers'
@@ -168,14 +168,14 @@ describe 'patron path', {:type => :feature} do
   end
 
   it "allows patron to view a list of patrons" do
-    patron = Patron.new({:patron_id => nil, :name => 'Mr. Rogers',:phone => '503-250-2173'})
+    patron = Patron.new({:id => nil, :name => 'Mr. Rogers',:phone => '503-250-2173'})
     patron.save()
     visit '/patron/patrons'
     expect(page).to have_content("Mr. Rogers")
   end
 
   it "allows the patron to view their account page" do
-    patron = Patron.new({:patron_id => nil, :name => 'Mr. Rogers',:phone => '503-250-2173'})
+    patron = Patron.new({:id => nil, :name => 'Mr. Rogers',:phone => '503-250-2173'})
     patron.save()
     visit '/patron/patrons'
     click_link 'Mr. Rogers'
@@ -183,7 +183,7 @@ describe 'patron path', {:type => :feature} do
   end
 
   it "allows the patron to update their account" do
-    patron = Patron.new({:patron_id => nil, :name => 'Mr. Rogers',:phone => '503-250-2173'})
+    patron = Patron.new({:id => nil, :name => 'Mr. Rogers',:phone => '503-250-2173'})
     patron.save()
     visit '/patron/patrons'
     click_link 'Mr. Rogers'
@@ -195,7 +195,7 @@ describe 'patron path', {:type => :feature} do
   end
 
   it "allows the patron to delete an account" do
-    patron = Patron.new({:patron_id => nil, :name => 'Mr. Rogers',:phone => '503-250-2173'})
+    patron = Patron.new({:id => nil, :name => 'Mr. Rogers',:phone => '503-250-2173'})
     patron.save()
     visit '/patron/patrons'
     click_link 'Mr. Rogers'
@@ -205,7 +205,7 @@ describe 'patron path', {:type => :feature} do
   end
 
   it "allows the patron to view a list of books in the catalog" do
-    book = Book.new({:book_id => nil, :title => '19Q4',:author => 'Haruki Murakami', :year_published => '2009'})
+    book = Book.new({:id => nil, :title => '19Q4',:author => 'Haruki Murakami', :year_published => '2009'})
     book.save()
     visit '/patron'
     click_link 'View All Books'
@@ -213,7 +213,7 @@ describe 'patron path', {:type => :feature} do
   end
 
   it "allows the patron to view a book" do
-    book = Book.new({:book_id => nil, :title => '19Q4',:author => 'Haruki Murakami', :year_published => '2009'})
+    book = Book.new({:id => nil, :title => '19Q4',:author => 'Haruki Murakami', :year_published => '2009'})
     book.save()
     visit '/patron/books'
     click_link '19Q4 by Haruki Murakami'
@@ -221,7 +221,7 @@ describe 'patron path', {:type => :feature} do
   end
 
   it "allows the patron to search for a book by author" do
-    book = Book.new({:book_id => nil, :title => '19Q4',:author => 'Haruki Murakami', :year_published => '2009'})
+    book = Book.new({:id => nil, :title => '19Q4',:author => 'Haruki Murakami', :year_published => '2009'})
     book.save()
     visit '/patron'
     click_link 'Search Books by Author'
@@ -231,7 +231,7 @@ describe 'patron path', {:type => :feature} do
   end
 
   it "allows the patron to search for a book by title" do
-    book = Book.new({:book_id => nil, :title => '19Q4',:author => 'Haruki Murakami', :year_published => '2009'})
+    book = Book.new({:id => nil, :title => '19Q4',:author => 'Haruki Murakami', :year_published => '2009'})
     book.save()
     visit '/patron'
     click_link 'Search Books by Title'

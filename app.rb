@@ -34,18 +34,18 @@ post('/librarian/books') do
   erb(:books)
 end
 
-get('/librarian/books/:book_id') do
-  @book = Book.find_by_book_id(params.fetch('book_id').to_i())
+get('/librarian/books/:id') do
+  @book = Book.find_by_id(params.fetch('id').to_i())
   erb(:book)
 end
 
-get('/librarian/books/:book_id/edit') do
-  @book = Book.find_by_book_id(params.fetch('book_id').to_i())
+get('/librarian/books/:id/edit') do
+  @book = Book.find_by_id(params.fetch('id').to_i())
   erb(:update_book_form)
 end
 
-patch('/librarian/books/:book_id') do
-  @book = Book.find_by_book_id(params.fetch("book_id").to_i())
+patch('/librarian/books/:id') do
+  @book = Book.find_by_id(params.fetch("id").to_i())
   title = params.fetch('title')
   if title.==('')
     title = @book.title()
@@ -62,8 +62,8 @@ patch('/librarian/books/:book_id') do
   erb(:book)
 end
 
-delete('/librarian/books/:book_id') do
-  @book = Book.find_by_book_id(params.fetch('book_id').to_i())
+delete('/librarian/books/:id') do
+  @book = Book.find_by_id(params.fetch('id').to_i())
   @book.delete()
   @books = Book.all()
   erb(:books)
@@ -109,18 +109,18 @@ post('/librarian/patrons') do
   erb(:patrons)
 end
 
-get('/librarian/patrons/:patron_id') do
-  @patron = Patron.find_by_patron_id(params.fetch('patron_id').to_i())
+get('/librarian/patrons/:id') do
+  @patron = Patron.find_by_id(params.fetch('id').to_i())
   erb(:patron)
 end
 
-get('/librarian/patrons/:patron_id/edit') do
-  @patron = Patron.find_by_patron_id(params.fetch('patron_id').to_i())
+get('/librarian/patrons/:id/edit') do
+  @patron = Patron.find_by_id(params.fetch('id').to_i())
   erb(:update_patron_form)
 end
 
-patch('/librarian/patrons/:patron_id') do
-  @patron = Patron.find_by_patron_id(params.fetch("patron_id").to_i())
+patch('/librarian/patrons/:id') do
+  @patron = Patron.find_by_id(params.fetch("id").to_i())
   name = params.fetch('name')
   if name.==('')
     name = @patron.name()
@@ -133,8 +133,8 @@ patch('/librarian/patrons/:patron_id') do
   erb(:patron)
 end
 
-delete('/librarian/patrons/:patron_id') do
-  @patron = Patron.find_by_patron_id(params.fetch('patron_id').to_i())
+delete('/librarian/patrons/:id') do
+  @patron = Patron.find_by_id(params.fetch('id').to_i())
   @patron.delete()
   @patrons = Patron.all()
   erb(:patrons)
@@ -164,18 +164,18 @@ post('/patron/patrons') do
   erb(:patrons_home)
 end
 
-get('/patron/patrons/:patron_id') do
-  @patron = Patron.find_by_patron_id(params.fetch('patron_id').to_i())
+get('/patron/patrons/:id') do
+  @patron = Patron.find_by_id(params.fetch('id').to_i())
   erb(:patron_account)
 end
 
-get('/patron/patrons/:patron_id/edit') do
-  @patron = Patron.find_by_patron_id(params.fetch('patron_id').to_i())
+get('/patron/patrons/:id/edit') do
+  @patron = Patron.find_by_id(params.fetch('id').to_i())
   erb(:patron_update_account)
 end
 
-patch('/patron/patrons/:patron_id') do
-  @patron = Patron.find_by_patron_id(params.fetch("patron_id").to_i())
+patch('/patron/patrons/:id') do
+  @patron = Patron.find_by_id(params.fetch("id").to_i())
   name = params.fetch('name')
   if name.==('')
     name = @patron.name()
@@ -188,8 +188,8 @@ patch('/patron/patrons/:patron_id') do
   erb(:patron_account)
 end
 
-delete('/patron/patrons/:patron_id') do
-  @patron = Patron.find_by_patron_id(params.fetch('patron_id').to_i())
+delete('/patron/patrons/:id') do
+  @patron = Patron.find_by_id(params.fetch('id').to_i())
   @patron.delete()
   @patrons = Patron.all()
   erb(:patrons_home)

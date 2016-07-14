@@ -1,6 +1,6 @@
 <h1>Edit <%= @book.title() %> </h1>
 
-<form action="/librarian/books/<%= @book.book_id()%>" method="post">
+<form action="/librarian/books/<%= @book.id()%>" method="post">
   <input name="_method" type="hidden" value="patch">
   <div class="form-group">
     <label for="title">Title:</label>
@@ -18,9 +18,9 @@
   <button type="submit">Submit</button>
 </form>
 <br>
-<form action="/librarian/books/<%= @book.book_id()%>" method="post">
+<form action="/librarian/books/<%= @book.id()%>" method="post">
   <input name="_method" type="hidden" value="delete">
   <button type="submit">Delete Book</button>
 </form>
 <br>
-<a href="/librarian/books/<%= @book.book_id() %>"><button type="button" >Back to <%= @book.title() %></button></a>
+<a href="/librarian/books/<%= @book.id() %>"><button type="button" >Back to <%= @book.title() %></button></a>

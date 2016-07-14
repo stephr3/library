@@ -1,6 +1,6 @@
 <h1>Edit Your Account Information </h1>
 
-<form action="/patron/patrons/<%= @patron.patron_id()%>" method="post">
+<form action="/patron/patrons/<%= @patron.id()%>" method="post">
   <input name="_method" type="hidden" value="patch">
   <div class="form-group">
     <label for="name">Name:</label>
@@ -14,9 +14,9 @@
 </form>
 <br>
 
-<form action="/patron/patrons/<%= @patron.patron_id()%>" method="post">
+<form action="/patron/patrons/<%= @patron.id()%>" method="post">
   <input name="_method" type="hidden" value="delete">
   <button type="submit">Delete Patron</button>
 </form>
 <br>
-<a href="/patron/patrons/<%= @patron.patron_id() %>"><button type="button" >Back to <%= @patron.name() %></button></a>
+<a href="/patron/patrons/<%= @patron.id() %>"><button type="button" >Back to <%= @patron.name() %></button></a>
