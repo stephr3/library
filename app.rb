@@ -35,6 +35,7 @@ post('/librarian/books') do
 end
 
 get('/librarian/books/:id') do
+  @patrons = Patron.all()
   @book = Book.find_by_id(params.fetch('id').to_i())
   erb(:book)
 end
@@ -206,4 +207,13 @@ end
 
 get('/patron/title_search') do
   erb(:title_search)
+end
+
+patch('/patron/books/:id') do
+  book_id = params.fetch("id").to_i()
+  @book= Book.find_by_id(book_id)
+  patron_ids = params.fetch("patron_ids")
+  @book.update({:patron_ids => patron_ids})
+  @patrons = Patron.all()
+  erb(:book)
 end

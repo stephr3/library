@@ -5,6 +5,35 @@
   <li>Year Published: <%= @book.year_published() %></li>
 </ul>
 
+<h2>Choose your name</h2>
+<% if @patrons.any?() %>
+  <form action="/patron/books/<%= @book.id %>" method="post">
+    <input type="hidden" name="_method" value="patch">
+    <% @patrons.each() do |patron| %>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" name="patron_ids[]" value="<%= patron.id() %>"><%= patron.name() %>
+        </label>
+      </div>
+    <% end %>
+
+    <button type="submit">Check Out</button>
+  </form>
+<% end %>
+
+<% if @book.patrons().any?() %>
+
+  <h3>This person has checked out the book:</h3>
+
+  <ul>
+    <% @book.patrons().each() do |patron| %>
+      <li><%= patron.name() %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>Nobody checked out the book yet! Maybe you should!
+<% end %>
+
 <a href="/librarian/books" id="books"><button type="button" name="books">Back to All Books</button></a>
 
 <p>
