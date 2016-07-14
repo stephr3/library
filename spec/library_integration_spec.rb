@@ -65,8 +65,19 @@ describe 'librarian path', {:type => :feature} do
     book = Book.new({:book_id => nil, :title => '19Q4',:author => 'Haruki Murakami', :year_published => '2009'})
     book.save()
     visit '/librarian'
+    click_link 'Search Books by Title'
     fill_in 'title_search', :with => '19Q4'
     click_button 'Search for this Title'
-    expect(page).to have_content('About this Book...')
+    expect(page).to have_content('19Q4')
+  end
+
+  it "allows the librarian to search for a book by author" do
+    book = Book.new({:book_id => nil, :title => '19Q4',:author => 'Haruki Murakami', :year_published => '2009'})
+    book.save()
+    visit '/librarian'
+    click_link 'Search Books by Author'
+    fill_in 'author_search', :with => 'Haruki Murakami'
+    click_button 'Search for this Author'
+    expect(page).to have_content('19Q4')
   end
 end

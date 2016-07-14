@@ -53,21 +53,29 @@ patch('/librarian/books/:book_id') do
   erb(:book)
 end
 
-delete('/librarian/books') do
+delete('/librarian/books/:book_id') do
   @book = Book.find_by_book_id(params.fetch('book_id').to_i())
   @book.delete()
   @books = Book.all()
   erb(:books)
 end
 
+get('/librarian/title_search') do
+  erb(:title_search)
+end
+
+get('/librarian/author_search') do
+  erb(:author_search)
+end
+
 post('/librarian/title_search') do
   title = params.fetch('title_search')
-  @book = Book.find_by_title(title)
+  @books = Book.find_by_title(title)
   erb(:search_results)
 end
 
-post('librarian/author_search/:id') do
+post('/librarian/author_search') do
   author = params.fetch('author_search')
-  @book = Book.find_by_author(author)
-  erb(:book)
+  @books = Book.find_by_author(author)
+  erb(:search_results)
 end

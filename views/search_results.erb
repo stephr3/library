@@ -1,5 +1,9 @@
 <h1>Your Search Results:</h1>
 
-<!-- two options for what to show based on what is returned (single book or array of books by an author)
+<ul>
+  <% @books.each do |book| %>
+    <a href="/librarian/books/<%= book.book_id %>"><li><%= book.title %> by <%= book.author %></li></a>
+  <% end %>
+</ul>
 
-have link to go to book/books, using @book   -->
+<a href="/librarian" id="nifty_nook"><button type="button" name="nifty_nook">Back to the Nifty Nook</button></a>

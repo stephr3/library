@@ -18,7 +18,7 @@
   <button type="submit">Submit</button>
 </form>
 
-<form action="/librarian/books" method="post">
+<form action="/librarian/books/<%= @book.book_id()%>" method="post">
   <input name="_method" type="hidden" value="delete">
   <button type="submit">Delete Book</button>
 </form>
